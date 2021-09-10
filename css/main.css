@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comfortaa', cursive;
+    font-size: 13px;
+    background: linear-gradient(to bottom right, rgb(82, 84, 199), rgb(255, 0, 0)) no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+header > h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    max-width: 350px;
+    border-radius: 10px;
+}
+
+main > #display {
+    text-align: center;
+    height: 4em;
+    padding: 4em .5em;
+    background-color: rgb(228, 224, 224);
+    border-radius: 10px 10px 0 0;
+}
+
+main > form {
+    display: grid;
+    grid-template: repeat(4, min-content) / 1fr;
+    margin: 1em;
+}
+
+input[type="number"], select {
+    width: 300px;
+    display: inline-block;
+    padding: 14px 20px;
+    margin: 8px 0;
+    font-size: 20px;
+    background-color: rgb(228, 224, 224);
+    color: black;
+    border: 0;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    width: 300px;
+    /*inconsistent width in firefox vs chrome fix */
+    padding: 14px 20px;
+    margin: 8px 0;
+    font-size: 20px;
+    background-color: rgb(79, 109, 243);
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.05s all;
+}
+
+input[type="number"]:focus, 
+select:focus {
+    outline: none !important;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+input[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+@media all and (min-width: 700px) {
+
+    main {
+        max-width: 800px;
+    }
+
+    main > #display {
+        width: 100%;
+    }
+    main > form {
+        grid-template: repeat(5, min-content) / 1fr 1fr;
+        column-gap: 1em;
+    }
+
+    label {
+       grid-column: 1 / span 1;
+       grid-row: 1 / span 1;  
+    }
+
+    input[type="number"] {
+        grid-column: 1 / span 2;
+        grid-row: 2 / span 1;
+        width: 100%; 
+        margin: 10px 0;   
+     }
+
+     #from-label {
+        grid-column: 1 / span 1;
+        grid-row: 3 / span 1;  
+     }
+
+    select#from {
+        grid-column: 1 / span 1;
+        grid-row: 3 / span 1;
+        margin: 20px 0; 
+    }
+
+    #to-label {
+        grid-column: 2 / span 1;
+        grid-row: 3 / span 1;  
+     }
+
+    select#to {
+        grid-column: 2 / span 1;
+        grid-row: 3 / span 1;
+        margin: 20px 0; 
+    }
+
+    input[type="submit"] {
+        grid-column: 1 / span 2;
+        grid-row: 4 / span 1;
+        width: 100%;
+        margin: 15px 0;     
+    }
+
+}

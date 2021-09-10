@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Simple currency converter</title>
+</head>
+<body>
+    <header>
+        <h1>scc</h1>
+    </header>
+    <main>
+        <div id="display">Display</div>
+        <hr>
+        <form action="#">
+            <label for="amount" id="amount-label">Amount</label>
+            <input type="number" id="amount" name="amount" min="0">
+            <label for="from" id="from-label">From</label>
+            <select name="from" id="from">
+            <option value="australia">Australia</option>
+            <option value="canada">Canada</option>
+            <option value="usa">USA</option>
+            </select>
+            <label for="to" id="to-label">To</label>
+            <select name="to" id="to"></select>
+            <input type="submit" value="Convert">
+        </form>
+    </main>
+    <footer>
+        <p>Designed and Developed with love by Albert Kombol</p>
+    </footer>
+</body>
+</html>
