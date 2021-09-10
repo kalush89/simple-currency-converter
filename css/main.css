@@ -8,7 +8,7 @@
 body {
     font-family: 'Comfortaa', cursive;
     font-size: 13px;
-    background: linear-gradient(to bottom right, rgb(82, 84, 199), rgb(255, 0, 0)) no-repeat;
+    background: linear-gradient(to bottom right, rgb(138, 7, 170), rgb(102, 97, 21)) no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,22 +26,25 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: white;
+    background-color: rgb(223, 222, 222);
     max-width: 350px;
     border-radius: 10px;
 }
 
 main > #display {
     text-align: center;
-    height: 4em;
-    padding: 4em .5em;
-    background-color: rgb(228, 224, 224);
-    border-radius: 10px 10px 0 0;
+    align-self: center;
+    padding: 1.5em .5em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px 5px 10px 10px;
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.75);
+    width: 97%;
+    font-size: 18px;
 }
 
 main > form {
     display: grid;
-    grid-template: repeat(4, min-content) / 1fr;
+    grid-template: repeat(5, min-content) / 1fr;
     margin: 1em;
 }
 
@@ -51,7 +54,7 @@ input[type="number"], select {
     padding: 14px 20px;
     margin: 8px 0;
     font-size: 20px;
-    background-color: rgb(228, 224, 224);
+    background-color: rgb(255, 255, 255);
     color: black;
     border: 0;
     border-radius: 4px;
@@ -81,6 +84,18 @@ input[type="submit"]:active {
     transform: scale(0.98);
 }
 
+label {
+    font-weight: 700;
+    color: rgb(77, 76, 76);;
+}
+
+p {
+    margin: 10px 2px;  
+    font-weight: 800;
+    color: rgb(77, 76, 76); 
+    text-align: center;
+}
+
 @media all and (min-width: 700px) {
 
     main {
@@ -88,14 +103,14 @@ input[type="submit"]:active {
     }
 
     main > #display {
-        width: 100%;
+        width: 97%;
     }
     main > form {
         grid-template: repeat(5, min-content) / 1fr 1fr;
         column-gap: 1em;
     }
 
-    label {
+    #amount-label {
        grid-column: 1 / span 1;
        grid-row: 1 / span 1;  
     }
@@ -135,5 +150,7 @@ input[type="submit"]:active {
         width: 100%;
         margin: 15px 0;     
     }
+
+    
 
 }
