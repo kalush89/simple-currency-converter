@@ -8,39 +8,43 @@
 body {
     font-family: 'Comfortaa', cursive;
     font-size: 13px;
-    background: linear-gradient(to bottom right, rgb(138, 7, 170), rgb(102, 97, 21)) no-repeat;
+    background:linear-gradient(to top right, rgba(156, 4, 93, 0.781), rgba(255, 238, 0, 0.699)), url('/img/currencies.jpg');
+    object-fit: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     min-height: 100vh; 
 }
-
+/* background: linear-gradient(to bottom right, rgb(138, 7, 170), rgb(102, 97, 21)) no-repeat;
+    */
 main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgb(223, 222, 222);
     max-width: 350px;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
-main > h1 {
+/*main > h1 {
     text-transform: uppercase;
     font-weight: 700;
     color: rgb(77, 76, 76);
     align-self: center;
     margin: 10px 0;
+}*/
+main > div {
+    margin: .6em;
 }
-
 main > #display {
     text-align: center;
     align-self: center;
-    padding: 1.2em .5em;
+    padding: 1em;
     background-color: rgb(255, 255, 255);
     border-radius: 5px 5px 5px 5px;
-    border: 2px solid rgb(173, 171, 171);
-    width: 97%;
+    border: 1px solid rgb(173, 171, 171);
+    width: 300px;
     font-size: 20px;
 }
 
@@ -64,7 +68,6 @@ input[type="number"], select {
 
 input[type="submit"] {
     width: 300px;
-    /*inconsistent width in firefox vs chrome fix */
     padding: 14px 20px;
     margin: 8px 0;
     font-size: 20px;
@@ -108,7 +111,7 @@ p {
     }
 
     main > #display {
-        width: 97%;
+        width: 96%;
     }
     main > form {
         grid-template: repeat(5, min-content) / 1fr 1fr;
