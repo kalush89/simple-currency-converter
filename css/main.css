@@ -48,6 +48,13 @@ main > #display {
     font-size: 20px;
 }
 
+.strip {
+    align-self: center;
+    background: linear-gradient(90deg, rgba(156, 4, 93, 0.781), rgba(255, 238, 0, 0.699));
+    height: 1.5px;
+   width: 100%;
+}
+
 main > form {
     display: grid;
     grid-template: repeat(5, min-content) / 1fr;
@@ -71,7 +78,7 @@ input[type="submit"] {
     padding: 14px 20px;
     margin: 8px 0;
     font-size: 20px;
-    background-color: rgb(79, 109, 243);
+    background-color: rgb(31, 70, 243);
     color: white;
     border: 0;
     border-radius: 4px;
@@ -89,6 +96,10 @@ input[type="submit"]:active {
     transform: scale(0.98);
 }
 
+input[type="submit"]:hover {
+    background-color: rgb(56, 91, 243);
+}
+
 label {
     font-weight: 700;
     color: rgb(77, 76, 76);;
@@ -100,9 +111,7 @@ p {
     color: rgb(77, 76, 76); 
     text-align: center;
 }
- .placeholder {
-     color: rgb(250, 245, 245);
- }
+
 
 @media all and (min-width: 790px) {
 
