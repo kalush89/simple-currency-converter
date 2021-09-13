@@ -38,14 +38,24 @@ class Converter {
         return `${fromCurrency}_${toCurrency}`;
     }
 
+    sortRes(array, key)
+{
+ return array.sort(function(a, b)
+ {
+  var x = a[key]; var y = b[key];
+  return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+ });
+}
+
     //api request for currencies
     async getCurrencies() {
         let parentFrom = this.getElement('from');
         let parentTo = this.getElement('to');
         let currStream = await fetch(`https://free.currconv.com/api/v7/currencies?apiKey=16ef1ff68cbc6fe7bdae`);
         let currencies = await currStream.json();
-        for (const currency of Object.values(currencies.results)) {
-            
+
+        let sortedCurrs = this.sortRes(Object.values(currencies.results), 'currencyName');
+        for (const currency of sortedCurrs) {
             this.appendOptns(parentFrom, parentTo, currency);
 
         }
