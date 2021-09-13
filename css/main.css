@@ -27,13 +27,6 @@ main {
     border-radius: 7px;
 }
 
-/*main > h1 {
-    text-transform: uppercase;
-    font-weight: 700;
-    color: rgb(77, 76, 76);
-    align-self: center;
-    margin: 10px 0;
-}*/
 main > div {
     margin: .6em;
 }
@@ -45,14 +38,14 @@ main > #display {
     border-radius: 5px 5px 5px 5px;
     border: 1px solid rgb(173, 171, 171);
     width: 300px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 
 
-main > div {
+main > div#form {
     display: grid;
-    grid-template: repeat(5, min-content) / 1fr;
+    grid-template: repeat(8, min-content) / 1fr;
     margin: 1em;
 }
 
@@ -125,8 +118,7 @@ p {
         width: 96%;
     }
     main > form {
-        grid-template: repeat(5, min-content) / 1fr 1fr;
-        column-gap: 1em;
+        grid-template: repeat(8, min-content) / 1fr 1fr;
     }
 
     #amount-label {
@@ -138,36 +130,51 @@ p {
         grid-column: 1 / span 2;
         grid-row: 2 / span 1;
         width: 100%; 
-        margin: 10px 0;   
+         
+     }
+
+     .err-amount {
+        grid-column: 1 / span 2;
+        grid-row: 3 / span 1;
+       
      }
 
      #from-label {
         grid-column: 1 / span 1;
-        grid-row: 3 / span 1;  
+        grid-row: 4 / span 1;  
      }
 
     select#from {
         grid-column: 1 / span 1;
-        grid-row: 3 / span 1;
-        margin: 20px 0; 
+        grid-row: 5 / span 1;
+       padding-right: .5em;
+    }
+
+    .err-from {
+        grid-column: 1 / span 1;
+        grid-row: 6 / span 1;
     }
 
     #to-label {
         grid-column: 2 / span 1;
-        grid-row: 3 / span 1;  
+        grid-row: 4 / span 1;  
      }
 
     select#to {
         grid-column: 2 / span 1;
-        grid-row: 3 / span 1;
-        margin: 20px 0; 
+        grid-row: 5 / span 1;
+        padding-left: .5em;
+    }
+    .err-to {
+        grid-column: 2 / span 1;
+        grid-row: 6 / span 1;
     }
 
     input[type="submit"] {
         grid-column: 1 / span 2;
-        grid-row: 4 / span 1;
+        grid-row: 7 / span 1;
         width: 100%;
-        margin: 15px 0;     
+       
     }
 
     

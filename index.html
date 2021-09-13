@@ -13,18 +13,18 @@
     <main>
         <div id="display">Display</div>
         
-            <div>
+            <div id="form">
             <label for="amount" id="amount-label">Amount</label>
             <input type="number" id="amount" name="amount" placeholder="Enter amount" min="0">
-            <div id="err"></div>
+            <div class="err-amount" id="err"></div>
 
             <label for="from" id="from-label">From</label>
             <select name="from" id="from"></select>
-            <div id="err"></div>
+            <div class="err-from" id="err"></div>
 
             <label for="to" id="to-label">To</label>
             <select name="to" id="to"></select>
-            <div id="err"></div>
+            <div class="err-amount" id="err"></div>
 
             <input type="submit" value="Convert" class="btn">
         
@@ -42,14 +42,18 @@
     let from = document.getElementById('from');
     let to = document.getElementById('to');
     let btn = document.querySelector('.btn');
-    let curConverter = new Converter(amount.innerText, from.innerText, to.innerText);
+    
+    
 
     window.addEventListener('load', (e) => {
-        curConverter.getCurrencies();
+        const convert = new Converter (parseInt(amount.value), from.value, to.value);
+        convert.getCurrencies();
         });
 
-        btn.addEventListener('click', (e) =>{
-            curConverter.validate();
+        btn.addEventListener('click', (e) => {
+            const convert = new Converter (parseInt(amount.value), from.value, to.value);
+            convert.validate();
+            console.log(convert);
         });
     </script>
 </body>
