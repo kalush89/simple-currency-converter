@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,28 +8,33 @@
     <link rel="stylesheet" href="./css/main.css">
     <title>Simple currency converter</title>
 </head>
+
 <body>
-    
-    
+
+
     <main>
         <div id="display">Display</div>
-        
-            <div id="form">
+
+        <div id="form">
             <label for="amount" id="amount-label">Amount</label>
             <input type="number" id="amount" name="amount" placeholder="Enter amount" min="0">
             <div class="err-amount" id="err"></div>
 
             <label for="from" id="from-label">From</label>
-            <select name="from" id="from"></select>
+            <select name="from" id="from">
+                <option selected value="">Exchange from</option>
+            </select>
             <div class="err-from" id="err"></div>
 
             <label for="to" id="to-label">To</label>
-            <select name="to" id="to"></select>
+            <select name="to" id="to">
+                <option selected value="">Exchange to</option>
+            </select>
             <div class="err-amount" id="err"></div>
 
             <input type="submit" value="Convert" class="btn">
-        
-                </div>
+
+        </div>
         <div class="strip"></div>
 
         <p>Designed and Developed by Albert Kombol</p>
@@ -36,25 +42,25 @@
     </main>
     <script src="./js/main.js"></script>
     <script>
-        
-    let display = document.getElementById('display');
-    let amount = document.getElementById('amount');
-    let from = document.getElementById('from');
-    let to = document.getElementById('to');
-    let btn = document.querySelector('.btn');
-    
-    
+        let display = document.getElementById('display');
+        let amount = document.getElementById('amount');
+        let from = document.getElementById('from');
+        let to = document.getElementById('to');
+        let btn = document.querySelector('.btn');
 
-    window.addEventListener('load', (e) => {
-        const convert = new Converter (parseInt(amount.value), from.value, to.value);
-        convert.getCurrencies();
+
+
+        window.addEventListener('load', (e) => {
+            const convert = new Converter(parseInt(amount.value), from.value, to.value);
+            convert.getCurrencies();
         });
 
         btn.addEventListener('click', (e) => {
-            const convert = new Converter (parseInt(amount.value), from.value, to.value);
+            const convert = new Converter(parseInt(amount.value), from.value, to.value);
             convert.validate();
             console.log(convert);
         });
     </script>
 </body>
+
 </html>

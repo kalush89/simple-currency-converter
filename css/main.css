@@ -27,13 +27,11 @@ main {
     border-radius: 7px;
 }
 
-main > div {
-    margin: .6em;
-}
 main > #display {
     text-align: center;
     align-self: center;
     padding: 1em;
+    margin: .6em;
     background-color: rgb(255, 255, 255);
     border-radius: 5px 5px 5px 5px;
     border: 1px solid rgb(173, 171, 171);
@@ -117,8 +115,9 @@ p {
     main > #display {
         width: 96%;
     }
-    main > form {
+    main > div#form {
         grid-template: repeat(8, min-content) / 1fr 1fr;
+        column-gap: 1em;
     }
 
     #amount-label {
@@ -134,7 +133,7 @@ p {
      }
 
      .err-amount {
-        grid-column: 1 / span 2;
+        grid-column: 1 / span 1;
         grid-row: 3 / span 1;
        
      }
@@ -147,7 +146,6 @@ p {
     select#from {
         grid-column: 1 / span 1;
         grid-row: 5 / span 1;
-       padding-right: .5em;
     }
 
     .err-from {
@@ -163,7 +161,6 @@ p {
     select#to {
         grid-column: 2 / span 1;
         grid-row: 5 / span 1;
-        padding-left: .5em;
     }
     .err-to {
         grid-column: 2 / span 1;
