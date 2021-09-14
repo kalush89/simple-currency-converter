@@ -32,10 +32,6 @@ Users should be able to:
 
 ![](./img/screenshot.png)
 
-#### Mobile view
-
-![](./img/mobile-screenshot.png)
-
 ### Links
 
 - Solution URL: [https://github.com/kalush89/simple-currency-converter](https://github.com/kalush89/simple-currency-converter)
