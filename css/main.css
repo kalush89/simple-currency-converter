@@ -37,6 +37,7 @@ main > #display {
     border: 1px solid rgb(173, 171, 171);
     width: 300px;
     font-size: 18px;
+    font-weight: 700;
 }
 
 
@@ -57,6 +58,10 @@ input[type="number"], select {
     color: black;
     border: 0;
     border-radius: 4px;
+}
+
+#from > option {
+    color: rgb(56, 56, 56);
 }
 
 input[type="submit"] {
@@ -91,6 +96,21 @@ label {
     color: rgb(77, 76, 76);;
 }
 
+div#err-amount {
+    color: red;
+    font-weight: 700;
+ }
+
+ div#err-from {
+    color: red;
+    font-weight: 700;
+ }
+
+ div#err-to {
+    color: red;
+    font-weight: 700;
+ }
+
 .strip {
     align-self: center;
     background: linear-gradient(90deg, rgba(156, 4, 93, 0.781), rgba(255, 238, 0, 0.699));
@@ -99,10 +119,14 @@ label {
 }
 
 p {
-    margin: 10px; 
+    margin-top: 10px; 
     font-weight: 800;
     color: rgb(77, 76, 76); 
     text-align: center;
+}
+
+p:nth-last-of-type(1){
+    margin-bottom: 20px;
 }
 
 
@@ -132,10 +156,9 @@ p {
          
      }
 
-     .err-amount {
+     div#err-amount {
         grid-column: 1 / span 1;
         grid-row: 3 / span 1;
-       
      }
 
      #from-label {
@@ -148,7 +171,7 @@ p {
         grid-row: 5 / span 1;
     }
 
-    .err-from {
+    div#err-from {
         grid-column: 1 / span 1;
         grid-row: 6 / span 1;
     }
@@ -162,7 +185,7 @@ p {
         grid-column: 2 / span 1;
         grid-row: 5 / span 1;
     }
-    .err-to {
+    div#err-to {
         grid-column: 2 / span 1;
         grid-row: 6 / span 1;
     }

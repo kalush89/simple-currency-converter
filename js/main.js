@@ -9,14 +9,23 @@ class Converter {
     validate() {
         let msg = 'This field is required!';
         console.log(this.amount);
-        if (!this.amount || !this.from || !this.to) {
-            this.output(msg, 'err');
+        if (!this.amount) {
+            this.output(msg, 'err-amount');
             return;
-        } else {
+        } else if (!this.from ) {
+            this.output(msg, 'err-from');
+            return;
+        }else if(!this.to) {
+            this.output(msg, 'err-to');
+            return;
+        }else{
+            let msg = '';
             console.log('good', this.amount);
+            this.output(msg, 'err-amount');
+            this.output(msg, 'err-from');
+            this.output(msg, 'err-to');
             this.convert();
-            this.output(' ', 'err');
-        }
+            }
 
     }
 
@@ -106,7 +115,7 @@ class Converter {
             let rate = Object.values(res)[0];
             let display = this.getElement('display');
             let result = rate * this.amount;
-            display.innerText = `Exchanges to ${result}`;
+            display.innerText = `Exchanges to ${Math.round(result)}`;
             
         }).catch(err => console.log(err));
     
