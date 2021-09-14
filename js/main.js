@@ -100,8 +100,6 @@ class Converter {
         try{
         let currStream = await fetch(`https://free.currconv.com/api/v7/convert?q=${this.encodeUri()}&compact=ultra&apiKey=16ef1ff68cbc6fe7bdae`);
         let rate = await currStream.json();
-//console.log(rate);
-
         return rate;
         }catch(e){
             console.log(e);
@@ -111,11 +109,10 @@ class Converter {
     //convert
     convert() {
         this.getRate().then(res => {
-            console.log('res',Object.values(res)[0]);
             let rate = Object.values(res)[0];
             let display = this.getElement('display');
             let result = rate * this.amount;
-            display.innerText = `Exchanges to ${Math.round(result)}`;
+            display.innerText = `Exchanges to ${result.toFixed(2)}`;
             
         }).catch(err => console.log(err));
     
