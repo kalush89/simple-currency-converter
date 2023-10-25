@@ -50,14 +50,19 @@
     <script>
         if("serviceWorker" in navigator){
         navigator.serviceWorker.register("sw.js").then(registration=>{
-        console.log("SW Registered!");
-        }).catch(error=>{
-        console.log("SW Registration Failed");
+            if(registration.installing) {
+                        console.log('Service worker installing');
+                    } else if(registration.waiting) {
+                        console.log('Service worker installed');
+                    } else if(registration.active) {
+                        console.log('Service worker active!');
+                    }
+         
         });
         }else{
-        console.log("Not supported");
+            console.log(" Service worker not supported");
         }
-
+        
         let display = document.getElementById('display');
         let amount = document.getElementById('amount');
         let from = document.getElementById('from');
