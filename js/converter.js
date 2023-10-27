@@ -1,4 +1,4 @@
-class Converter {
+export default class Converter {
     constructor(amount, from, to) {
         this.amount = amount;
         this.from = from;
@@ -56,19 +56,26 @@ class Converter {
         });
     }
 
-    //api request for currencies
-    async getCurrencies() {
-        let parentFrom = this.getElement('from');
-        let parentTo = this.getElement('to');
-        let currStream = await fetch(`https://free.currconv.com/api/v7/currencies?apiKey=16ef1ff68cbc6fe7bdae`);
+    //fetch currencies
+    async fetchCurrencies(){
+        let currStream = await fetch(`https://v6.exchangerate-api.com/v6/6fc470f0a84d722c73f3165d/codes`);
         let currencies = await currStream.json();
-
-        let sortedCurrs = this.sortRes(Object.values(currencies.results), 'currencyName');
-        for (const currency of sortedCurrs) {
-            this.appendOptns(parentFrom, parentTo, currency);
-
-        }
+        return currencies.supported_codes;
     }
+
+    //api request for currencies
+    // async getCurrencies() {
+    //     let parentFrom = this.getElement('from');
+    //     let parentTo = this.getElement('to');
+    //     let currStream = await fetch(`https://free.currconv.com/api/v7/currencies?apiKey=16ef1ff68cbc6fe7bdae`);
+    //     let currencies = await currStream.json();
+
+    //     let sortedCurrs = this.sortRes(Object.values(currencies.results), 'currencyName');
+    //     for (const currency of sortedCurrs) {
+    //         this.appendOptns(parentFrom, parentTo, currency);
+
+    //     }
+    // }
 
     //Shorten Select options
     truncateOptns(txt) {
@@ -85,14 +92,14 @@ class Converter {
         const childNodeFrom = document.createElement('option');
         const childNodeTo = document.createElement('option');
 
-        childNodeFrom.innerHTML = this.truncateOptns(content.currencyName);
-        childNodeTo.innerHTML = this.truncateOptns(content.currencyName);
+        childNodeFrom.innerHTML = this.truncateOptns(content[1]);
+        childNodeTo.innerHTML = this.truncateOptns(content[1]);
 
         parentFrom.append(childNodeFrom);
         parentTo.append(childNodeTo);
 
-        childNodeFrom.setAttribute('value', content.id);
-        childNodeTo.setAttribute('value', content.id);
+        childNodeFrom.setAttribute('value', content[0]);
+        childNodeTo.setAttribute('value', content[0]);
     }
 
     //api request for rate
@@ -115,8 +122,7 @@ class Converter {
             display.innerText = `Exchanges to ${result.toFixed(2)}`;
             
         }).catch(err => console.log(err));
-    
-        }
+    }
        
     
 

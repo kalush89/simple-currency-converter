@@ -46,8 +46,41 @@
         <p>Designed and Developed by Albert Kombol</p>
         <p>Photo by Pratikxox from Pexels</p>
     </main>
-    <script src="./js/main.js"></script>
-    <script>
+    
+    <script type="module">
+        import DB from './js/idb.js';
+        import Converter from './js/converter.js';
+
+        let display = document.getElementById('display');
+        let amount = document.getElementById('amount');
+        let from = document.getElementById('from');
+        let to = document.getElementById('to');
+        let btn = document.querySelector('.btn');
+
+
+        const Database = new DB();
+        const convert = new Converter(parseInt(amount.value), from.value, to.value);
+        //didFetchCurrenciesFromDatabase = false;
+
+       function addToDatabase() {
+            return convert.fetchCurrencies()
+                .then(response => {
+                    // Create an array of promises for inserting each currency
+                    const insertPromises = response.map(currency => {
+                        return Database.insertToDB(currency, 'currencies');
+                    });
+
+                    // Use Promise.all to wait for all insert operations to complete
+                    return Promise.all(insertPromises)
+                        .then(() => response); // Resolve with the response data after inserts
+                })
+                .catch(error => {
+                    console.error("Error adding data to the database:", error);
+                    throw error; // Rethrow the error for proper error handling in the promise chain
+                });
+        }
+
+
         if("serviceWorker" in navigator){
         navigator.serviceWorker.register("sw.js").then(registration=>{
             if(registration.installing) {
@@ -57,24 +90,31 @@
                     } else if(registration.active) {
                         console.log('Service worker active!');
                     }
+
+                    //Handle idb cuurrency tasks
+            Database.retrieve('currencies')
+            .then(currenciesFromDatabase => {
+                    if (currenciesFromDatabase.length === 0) {
+                        return addToDatabase()
+                    }
+                    
+                    return Promise.resolve(currenciesFromDatabase);
+                })
+            .then((currencies) => {
+                for (const currency of currencies) {
+                    convert.appendOptns(from, to, currency);
+                }
+                return Promise.resolve();
+            }).catch((error) => {
+                console.error("An error occurred:", error);
+            });
          
         });
         }else{
             console.log(" Service worker not supported");
         }
-        
-        let display = document.getElementById('display');
-        let amount = document.getElementById('amount');
-        let from = document.getElementById('from');
-        let to = document.getElementById('to');
-        let btn = document.querySelector('.btn');
 
 
-
-        window.addEventListener('load', (e) => {
-            const convert = new Converter(parseInt(amount.value), from.value, to.value);
-            convert.getCurrencies();
-        });
 
         btn.addEventListener('click', (e) => {
             const convert = new Converter(parseInt(amount.value), from.value, to.value);

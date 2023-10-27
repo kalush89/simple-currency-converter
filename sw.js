@@ -7,7 +7,8 @@ self.addEventListener("install", (event) => {
         cache.addAll([
           '/', 
           '/index.html', 
-          '/js/main.js', 
+          '/js/converter.js', 
+          '/js/idb.js',
           '/css/main.css', 
           '/assets/favicon-16x16.png',
           '/assets/favicon-32x32.png', 
@@ -15,6 +16,7 @@ self.addEventListener("install", (event) => {
           '/assets/logoIcon192.png', 
           '/assets/logoIcon512.png', 
           '/img/currencies.jpg', 
+          'https://cdn.jsdelivr.net/npm/idb@7/+esm',
           'https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap'
         ]),
       ),
