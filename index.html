@@ -46,8 +46,41 @@
         <p>Designed and Developed by Albert Kombol</p>
         <p>Photo by Pratikxox from Pexels</p>
     </main>
-    <script src="./js/main.js"></script>
-    <script>
+    
+    <script type="module">
+        import DB from './js/idb.js';
+        import Converter from './js/converter.js';
+
+        let display = document.getElementById('display');
+        let amount = document.getElementById('amount');
+        let from = document.getElementById('from');
+        let to = document.getElementById('to');
+        let btn = document.querySelector('.btn');
+
+
+        const Database = new DB();
+        const convert = new Converter(parseInt(amount.value), from.value, to.value);
+       
+        //add to idb if not available and retrieve
+       function updateDatabase(store, fetchData) {
+            return fetchData()
+                .then(response => {
+                    // Create an array of promises for inserting each currency
+                    const insertPromises = response.map(data => {
+                        return Database.insertToDB(data, store);
+                    });
+
+                    // Use Promise.all to wait for all insert operations to complete
+                    return Promise.all(insertPromises)
+                        .then(() => response); // Resolve with the response data after inserts
+                })
+                .catch(error => {
+                    console.error("Error adding data to the database:", error);
+                    throw error; // Rethrow the error for proper error handling in the promise chain
+                });
+        }
+
+
         if("serviceWorker" in navigator){
         navigator.serviceWorker.register("sw.js").then(registration=>{
             if(registration.installing) {
@@ -57,29 +90,65 @@
                     } else if(registration.active) {
                         console.log('Service worker active!');
                     }
+
+                    //Handle idb cuurrency tasks
+            Database.retrieve('currencies')
+            .then(currenciesFromDatabase => {
+                    if (currenciesFromDatabase.length === 0) {
+                        return updateDatabase('currencies', convert.fetchCurrencies)
+                    }
+                    
+                    return Promise.resolve(currenciesFromDatabase);
+                })
+            .then((currencies) => {
+                for (const currency of currencies) {
+                    convert.appendOptns(from, to, currency);
+                }
+                return Promise.resolve();
+            }).catch((error) => {
+                console.error("An error occurred:", error);
+            });
          
         });
         }else{
             console.log(" Service worker not supported");
         }
-        
-        let display = document.getElementById('display');
-        let amount = document.getElementById('amount');
-        let from = document.getElementById('from');
-        let to = document.getElementById('to');
-        let btn = document.querySelector('.btn');
 
 
-
-        window.addEventListener('load', (e) => {
-            const convert = new Converter(parseInt(amount.value), from.value, to.value);
-            convert.getCurrencies();
-        });
 
         btn.addEventListener('click', (e) => {
             const convert = new Converter(parseInt(amount.value), from.value, to.value);
-            convert.validate();
-            console.log(convert);
+            const pair = convert.encodeUri()
+            
+            //return exchange rate if currency pair in db
+            //if not fetch from server and store in db
+            //issue exchange rate from db
+            //const convert = new Converter(parseInt(amount.value), from.value, to.value);
+            Database.retrieve('rates', pair)
+            .then(rateFromDatabase => {
+              
+                    if ( rateFromDatabase === undefined || rateFromDatabase.length == 0 ) {
+                        return updateDatabase('rates', convert.fetchRate)
+                    }
+                    
+                    return Promise.resolve(rateFromDatabase);
+                })
+            .then((res) => {
+             
+                //calculate the conversion
+               if (res.rate !== undefined) {
+                    convert.validate(res.rate);
+                } else {
+                    convert.validate(res[0].rate);
+                }
+               
+                
+                return Promise.resolve();
+            }).catch((error) => {
+                console.error("An error occurred:", error);
+            });
+            
+            
         });
     </script>
 </body>
