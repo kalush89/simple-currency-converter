@@ -1,4 +1,4 @@
-# Simple Currency Converter
+# Simple Currency Converter PWA
 
 ## Table of contents
 
@@ -46,6 +46,7 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
+- IndexedDB
 
 ### What I learned
 
@@ -141,9 +142,10 @@ Async await use for API requests return a promise.
 ### Useful resources
 
 - [GADS 2021 workshop 'Fetching data from APIs with Javascript'](https://www.youtube.com/watch?v=HPozqIIYyk4) - This gave me a starting point in implementing async/await. I recommend it to anyone starting out.
-
+- [Bitsofcode](https://bitsofco.de/bitsofcode-pwa-part-2-instant-loading-with-indexeddb/) - Thanks to Ire Aderinokun's awsome article I was able to implement IndexedDB with relative ease.
+- [Jake Archiebald's IDB library](https://github.com/jakearchibald/idb) - Adds a thin layer to indexeddb that really makes a difference.
 
 ## Author
 
- - [Albert Kombol](https://community.andela.com/u/91e658ee)
+ - [Albert Kombol](https://twitter.com/realterree)
 
