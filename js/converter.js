@@ -6,7 +6,7 @@ export default class Converter {
     }
 
     //Validate
-    validate() {
+    validate(rate) {
         let msg = 'This field is required!';
         console.log(this.amount);
         if (!this.amount) {
@@ -24,7 +24,7 @@ export default class Converter {
             this.output(msg, 'err-amount');
             this.output(msg, 'err-from');
             this.output(msg, 'err-to');
-            this.convert();
+            this.convertCurrency(rate);
             }
 
     }
@@ -41,11 +41,11 @@ export default class Converter {
     }
 
     //encode
-    encodeUri() {
+    encodeUri = () => {
         let fromCurrency = encodeURIComponent(this.from);
         let toCurrency = encodeURIComponent(this.to);
-        return `${fromCurrency}_${toCurrency}`;
-    }
+        return `${fromCurrency}/${toCurrency}`;
+    };
 
     //Sort JSON response in alphabetical order
     sortRes(array, key) {
@@ -103,25 +103,27 @@ export default class Converter {
     }
 
     //api request for rate
-    getRate = async () => {
-        try{
-        let currStream = await fetch(`https://free.currconv.com/api/v7/convert?q=${this.encodeUri()}&compact=ultra&apiKey=16ef1ff68cbc6fe7bdae`);
-        let rate = await currStream.json();
-        return rate;
-        }catch(e){
-            console.log(e);
+    fetchRate = async() =>{
+        try {
+            
+            const encodedUri = this.encodeUri(); 
+            let currStream = await fetch(`https://v6.exchangerate-api.com/v6/6fc470f0a84d722c73f3165d/pair/${encodedUri}`);
+            let rate = await currStream.json();
+            return [{
+                pair: encodedUri,
+                rate: rate.conversion_rate
+            }];
+        } catch (error) {
+            console.log('Error fetching rate', error)
         }
+        
     }
 
     //convert
-    convert() {
-        this.getRate().then(res => {
-            let rate = Object.values(res)[0];
+    convertCurrency(rate) {
             let display = this.getElement('display');
             let result = rate * this.amount;
-            display.innerText = `Exchanges to ${result.toFixed(2)}`;
-            
-        }).catch(err => console.log(err));
+            display.innerText = `${result.toFixed(2)}`;
     }
        
     
