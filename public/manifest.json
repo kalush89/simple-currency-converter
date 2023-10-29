@@ -1,7 +1,7 @@
 {
     "name":"Simple currency converter",
     "short_name":"SC2",
-    "start_url": "./index.html",
+    "start_url": "/index.html",
     "icons":[
         {
             "src":"assets/logoIcon192.png",

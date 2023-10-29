@@ -58,24 +58,10 @@ export default class Converter {
 
     //fetch currencies
     async fetchCurrencies(){
-        let currStream = await fetch(`https://v6.exchangerate-api.com/v6/6fc470f0a84d722c73f3165d/codes`);
+        let currStream = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/codes`);
         let currencies = await currStream.json();
         return currencies.supported_codes;
     }
-
-    //api request for currencies
-    // async getCurrencies() {
-    //     let parentFrom = this.getElement('from');
-    //     let parentTo = this.getElement('to');
-    //     let currStream = await fetch(`https://free.currconv.com/api/v7/currencies?apiKey=16ef1ff68cbc6fe7bdae`);
-    //     let currencies = await currStream.json();
-
-    //     let sortedCurrs = this.sortRes(Object.values(currencies.results), 'currencyName');
-    //     for (const currency of sortedCurrs) {
-    //         this.appendOptns(parentFrom, parentTo, currency);
-
-    //     }
-    // }
 
     //Shorten Select options
     truncateOptns(txt) {
@@ -107,7 +93,7 @@ export default class Converter {
         try {
             
             const encodedUri = this.encodeUri(); 
-            let currStream = await fetch(`https://v6.exchangerate-api.com/v6/6fc470f0a84d722c73f3165d/pair/${encodedUri}`);
+            let currStream = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${encodedUri}`);
             let rate = await currStream.json();
             return [{
                 pair: encodedUri,
